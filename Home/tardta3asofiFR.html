@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+<html lang="fr" dir="ltr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Compensations résultant d'un licenciement abusif</title>
+
+    <!--linking font aswesome for icons -->
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        * {
+
+            margin: 0;
+
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .section-content {
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            padding: 60px 0 60px;
+            text-transform: uppercase;
+            font-size: large;
+            font-size: 30px;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 90px;
+            height: 6px;
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 30px;
+            background: #2980b9;
+        }
+
+        /*navigation style*/
+        .header {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            background: #f5f5f5;
+        }
+
+        header .navbar {
+            display: flex;
+            padding: 20px;
+            align-items: center;
+            justify-content: space-between;
+            background: #f5f5f5;
+        }
+
+        .navbar .nav-menu {
+            display: flex;
+            gap: 10px;
+            margin-right: 100px;
+        }
+
+
+        nav a img {
+            width: 110px;
+            padding: 0px 17px 0px;
+            margin: 8px 45px 5px 10px;
+        }
+
+        .navbar .nav-menu .nav-link {
+            color: #2980b9;
+            font-size: 20px;
+            padding: 10px 18px;
+            margin: 0px 35px;
+            border-radius: 20px;
+            transition: 0.3s ease;
+        }
+
+        .navbar .nav-menu .nav-link:hover {
+            color: white;
+            background: #2980b9;
+        }
+
+        .navbar :where(#menu-close-button, #menu-open-button) {
+            display: none;
+        }
+
+        .lange {
+            text-decoration: none;
+            font-size: 18px;
+            color: #f5f5f5;
+            padding: 8px 15px;
+            background: #2980b9;
+            border-radius: 10px;
+        }
+
+        .lange:hover {
+            text-decoration: none;
+            font-size: 18px;
+            color: #2980b9;
+            padding: 6px 13px;
+            background: transparent;
+            border: #2980b9 solid 2px;
+            border-radius: 10px;
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            padding: 30px 10%;
+
+            background: #f5f5f5;
+
+            flex: 1;
+
+            width: 100%;
+
+            min-height: 100vh;
+
+            background: #f5f5f5;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+        section.titel {
+
+            max-width: 700px;
+
+            margin: 0 auto 45px;
+
+            text-align: center;
+
+        }
+
+        section.titel h1 {
+
+            position: relative;
+
+            color: #2980b9;
+
+            font-size: clamp(26px, 3vw, 32px);
+
+            margin-bottom: 30px;
+
+            display: inline-block;
+
+        }
+
+        section.titel h1::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 100%;
+
+            height: 1px;
+
+            top: 120%;
+
+            left: 0px;
+
+            background-color: #03080c;
+
+        }
+
+        section.titel h1::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 50%;
+
+            height: 3px;
+
+            top: calc(120% - 1px);
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            background-color: #2980b9;
+
+        }
+
+        .titel p {
+
+            font-size: clamp(16px, 2.5vw, 20px);
+
+            line-height: 1.5;
+
+        }
+
+        section.service-container {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+        }
+
+        .service-container .service-box {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            flex-direction: column;
+
+            flex: 1 1 300px;
+
+            text-align: center;
+
+            padding: 20px 15px 30px;
+
+            background-color: white;
+
+            border: 1px solid #e9e9e9;
+
+            margin-bottom: 20px;
+
+            cursor: pointer;
+
+            transition: all 0.4s ease;
+
+            border-radius: 8px;
+
+        }
+
+        .service-container .service-box a {
+
+            text-decoration: none;
+
+            color: inherit;
+
+        }
+
+        .service-container .service-box:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+        }
+
+        .service-box h2 {
+
+            padding: 15px 0 10px;
+
+            color: #2980b9;
+
+            font-size: clamp(18px, 2.5vw, 23px);
+
+        }
+
+        .service-box p {
+
+            color: #555;
+
+            line-height: 1.5;
+
+            font-size: clamp(15px, 2vw, 17px);
+
+            padding: 0 10px;
+
+        }
+
+        /* Footer */
+
+        .footer {
+
+            width: 100%;
+
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+            font-weight: 400;
+
+            background: white;
+
+            padding: 40px 0;
+
+            margin-top: auto;
+
+        }
+
+        .footer .social {
+
+            text-align: center;
+
+            padding-bottom: 30px;
+
+        }
+
+        .footer .social a {
+
+            color: #4b4c4d;
+
+            font-size: clamp(20px, 3vw, 25px);
+
+            border: 2px solid #ccc;
+
+            width: clamp(35px, 8vw, 40px);
+
+            height: clamp(35px, 8vw, 40px);
+
+            line-height: clamp(33px, 7.5vw, 38px);
+
+            display: inline-block;
+
+            text-align: center;
+
+            border-radius: 50%;
+
+            margin: 0 7px;
+
+            opacity: 0.75;
+
+            transition: all 0.3s ease;
+
+        }
+
+        .footer .social a:hover {
+
+            opacity: 1;
+
+            background: #f5f5f5;
+
+        }
+
+        .footer ul {
+
+            margin-top: 0;
+
+            padding: 0;
+
+            list-style: none;
+
+            font-size: clamp(14px, 2.5vw, 18px);
+
+            line-height: 1.6;
+
+            margin-bottom: 0;
+
+            text-align: center;
+
+            direction: ltr;
+
+        }
+
+        .footer ul li a {
+
+            color: #4b4c4d;
+
+            text-decoration: none;
+
+            opacity: 0.8;
+
+            transition: all 0.3s ease;
+
+            padding: 5px 0;
+
+            display: inline-block;
+
+        }
+
+        .footer ul li {
+
+            display: inline-block;
+
+            padding: 0 15px;
+
+        }
+
+        .footer ul li a:hover {
+
+            opacity: 1;
+
+            color: #2980b9;
+
+            border-bottom: 2px solid #2980b9;
+
+        }
+
+        .footer .copyright {
+
+            margin-top: 35px;
+
+            text-align: center;
+
+            font-size: clamp(13px, 2vw, 15px);
+
+            color: #4b4c4d;
+
+        }
+
+        /* Media Queries */
+
+        /*responsive media query code for max width 900px */
+        @media screen and (max-width: 900px) {
+
+            .navbar :where(#menu-close-button, #menu-open-button) {
+                display: block;
+                font-size: 30px;
+
+            }
+
+            body.show-mobile-menu header::before {
+                content: "";
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                backdrop-filter: blur(5px);
+                background: rgba(0, 0, 0, 0);
+                z-index: 1;
+            }
+
+            .navbar #menu-close-button {
+                position: absolute;
+                right: 30px;
+                top: 30px;
+                color: #2980b9;
+                background: transparent;
+
+            }
+
+            .navbar #menu-open-button {
+                color: #2980b9;
+                margin: 20px;
+                width: 60px;
+                background: transparent;
+            }
+
+            .navbar .nav-menu {
+                display: block;
+                position: fixed;
+                left: -3000px;
+                top: 0;
+                width: 300px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 100px;
+                background: #f5f5f5;
+                margin: 0;
+                transition: left 0.2s ease;
+            }
+
+            body.show-mobile-menu .navbar .nav-menu {
+                left: 0;
+                z-index: 2;
+
+            }
+
+            .navbar .nav-menu .nav-link {
+                color: #2980b9;
+                display: block;
+                margin: 17px;
+                font-size: large;
+                font-size: 20px;
+            }
+
+            .hero-section .section-content {
+                gap: 50px;
+                text-align: center;
+                padding: 30px 20px 20px;
+                flex-direction: column-reverse;
+                justify-content: center;
+
+            }
+
+            .hero-section .hero-detqils :is(.subtitle, .description),
+            .about-section .about-detalis {
+                max-width: 100%;
+
+            }
+
+            .hero-section .hero-detqils .buttons {
+                justify-content: center;
+                margin-right: 0;
+            }
+
+            .hero-section .hero-image-wrapper .hero-image {
+                max-width: 350px;
+                margin: 30px 0 0px 0px;
+                align-items: center;
+            }
+
+
+
+        }
+
+
+        @media (max-width: 1000px) {
+
+            .container {
+
+                padding: 30px 5%;
+
+            }
+
+            .service-container .service-box {
+
+                flex-basis: 48%;
+
+            }
+
+        }
+
+        @media (max-width: 800px) {
+
+            section.titel {
+
+                margin-bottom: 30px;
+
+            }
+
+            .service-container {
+
+                justify-content: center;
+
+            }
+
+            .service-container .service-box {
+
+                flex-basis: 100%;
+
+                max-width: 500px;
+
+            }
+
+            .footer ul li {
+
+                padding: 0 10px;
+
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .container {
+
+                padding: 20px 15px;
+
+            }
+
+            section.titel h1 {
+
+                margin-bottom: 20px;
+
+            }
+
+            .service-container .service-box {
+
+                padding: 15px 10px 20px;
+
+            }
+
+            .footer .social a {
+
+                margin: 0 5px;
+
+                width: 30px;
+
+                height: 30px;
+
+                line-height: 28px;
+
+                font-size: 16px;
+
+            }
+
+            .footer ul li {
+
+                display: block;
+
+                padding: 8px 0;
+
+            }
+
+        }
+
+        @media screen and (max-width: 1200px) {
+            .navbar .nav-menu .nav-link {
+                margin: 15px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin: 0px 30px 0px 0px;
+            }
+        }
+
+        @media screen and (max-width: 1000px) {
+            .navbar .nav-menu .nav-link {
+                margin: 6px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin-right: 50px;
+            }
+        }
+
+        @media screen and (max-width: 950px) {
+            .navbar .nav-menu .nav-link {
+                margin: 0px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin-right: 30px;
+            }
+        }
+    </style>
+
+</head>
+<header>
+    <nav class="navbar section-content">
+        <a href="homeFR.html"><img src="5sans_back.png" alt="png"></a>
+        <ul class="nav-menu">
+            <button id="menu-close-button" class="fas fa-times"></button>
+            <li class="nav-item"><a href="homeFR.html" class="nav-link">Accueil</a></li>
+            <li class="nav-item"><a href="AboutFR.html" class="nav-link">À propos</a></li>
+            <li class="nav-item"><a href="contacteFR.html" class="nav-link">Contactez-nous</a></li>
+            <li class="nav-item"><a href="serviceFR.html" class="nav-link">Nos services</a></li>
+            <li class="lang"><a href="HomeAR.html" class="lange">AR</a></li>
+
+
+        </ul>
+        <button id="menu-open-button" class="fas fa-bars"></button>
+    </nav>
+</header>
+
+<body>
+
+    <div class="container">
+
+        <section class="titel">
+
+            <h1>Compensations résultant d'un licenciement abusif</h1>
+
+            <p>Un licenciement abusif est la rupture du contrat de travail par l'employeur sans motif légitime ou en
+                violation des procédures légales. Cela entraîne des compensations au profit du travailleur.</p>
+
+        </section>
+
+        <section class="service-container">
+
+            <div class="service-box">
+
+                <a href="ta3wid 3ni lfasle/indexFR.html">
+
+                    <h2>Compensation pour licenciement</h2>
+
+                    <p>La compensation pour licenciement est un montant accordé au travailleur lors de la rupture
+                        injustifiée du contrat de travail, calculé en fonction de son ancienneté dans l'emploi, selon un
+                        nombre d'heures spécifié pour chaque année.</p>
+
+                </a>
+
+            </div>
+
+            <div class="service-box">
+
+                <a href="ajal ikhtar/indexFR.html">
+
+                    <h2>Compensation pour délai de préavis</h2>
+
+                    <h2> </h2>
+
+                    <p>Le législateur a imposé à tout employeur souhaitant licencier ses travailleurs de leur accorder
+                        un délai suffisant pour rechercher un nouvel emploi afin d'assurer leur vie familiale.</p>
+
+                </a>
+
+            </div>
+
+            <div class="service-box">
+
+                <a href="ta3wid darar/indexFR.html">
+
+                    <h2>Compensation pour préjudice</h2>
+
+                    <p>La compensation pour préjudice est un montant accordé au travailleur lorsqu'il prouve que le
+                        licenciement a été effectué sans motif légitime, visant à le compenser pour les dommages
+                        psychologiques et matériels résultant du licenciement abusif, généralement calculé sur la base
+                        de son salaire et de son ancienneté dans l'emploi.</p>
+
+                </a>
+
+            </div>
+
+            <div class="service-box">
+
+                <a href="ta3wid fo9dan chorle/fo9danchorleFR.html">
+
+                    <h2>Compensation pour perte d'emploi</h2>
+
+                    <p>La compensation pour perte d'emploi est une aide financière fournie par l'État, via la Caisse
+                        nationale de sécurité sociale, aux travailleurs ayant perdu leur emploi de manière involontaire.
+                        Pour en bénéficier, une certaine durée de cotisation et l'inscription en tant que demandeur
+                        d'emploi sont requises.</p>
+
+                </a>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <main>
+
+        <!--footer-->
+
+        <section class="footer">
+
+            <div class="social">
+
+                <a href="#"><i class="fab fa-facebook"></i></a>
+
+                <a href="#"><i class="fab fa-instagram"></i></a>
+
+                <a href="#"><i class="fab fa-x-twitter"></i></a>
+
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+
+            </div>
+
+            <ul class="list">
+
+                <li>
+
+                    <a href="homeFR.html">Home</a>
+
+                </li>
+
+                <li>
+
+                    <a href="AboutFR.html">About us</a>
+
+                </li>
+
+                <li>
+
+                    <a href="serviceFR.html">services</a>
+
+                </li>
+
+                <li>
+
+                    <a href="#">Tems</a>
+
+                </li>
+
+                <li>
+
+                    <a href="contacteFR.html">contact us</a>
+
+                </li>
+
+            </ul>
+
+            <p class="copyright">
+
+                Ajire company @2025
+
+            </p>
+
+        </section>
+
+    </main>
+
+</body>
+<script>
+    const menuOpenButton = document.querySelector("#menu-open-button");
+    const menuCloseButton = document.querySelector("#menu-close-button");
+
+    menuOpenButton.addEventListener("click", () => {
+        //toggle mobile menu visibility
+        document.body.classList.toggle("show-mobile-menu")
+    });
+
+    // close menu when the close buttone is clicked
+    menuCloseButton.addEventListener("click", () => menuOpenButton.click());
+
+</script>
+
+</html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+<html lang="fr" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contactez-nous</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .section-content {
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            padding: 60px 0 60px;
+            text-transform: uppercase;
+            font-size: large;
+            font-size: 30px;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 90px;
+            height: 6px;
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 30px;
+            background: #2980b9;
+        }
+
+        /*navigation style*/
+        .header {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            background: #f5f5f5;
+        }
+
+        header .navbar {
+            display: flex;
+            padding: 10px;
+            align-items: center;
+            justify-content: space-between;
+            background: #f5f5f5;
+        }
+
+        .navbar .nav-menu {
+            display: flex;
+            gap: 10px;
+            margin-right: 100px;
+        }
+
+
+        nav a img {
+            width: 100px;
+            padding: 0px 17px 0px;
+            margin: 8px 45px 5px 10px;
+        }
+
+        .navbar .nav-menu .nav-link {
+            color: #2980b9;
+            font-size: 20px;
+            padding: 10px 18px;
+            margin: 0px 35px;
+            border-radius: 20px;
+            transition: 0.3s ease;
+        }
+
+        .navbar .nav-menu .nav-link:hover {
+            color: white;
+            background: #2980b9;
+        }
+
+        .navbar :where(#menu-close-button, #menu-open-button) {
+            display: none;
+        }
+
+        .lange {
+            text-decoration: none;
+            font-size: 18px;
+            color: #f5f5f5;
+            padding: 8px 15px;
+            background: #2980b9;
+            border-radius: 10px;
+        }
+
+        .lange:hover {
+            text-decoration: none;
+            font-size: 18px;
+            color: #2980b9;
+            padding: 6px 13px;
+            background: transparent;
+            border: #2980b9 solid 2px;
+            border-radius: 10px;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 120vh;
+            background: #f5f5f5;
+        }
+
+        .left-content {
+            margin-right: 100px;
+        }
+
+        .left-content h3 {
+            color: #2980b9;
+            font-size: 30px;
+        }
+
+        .left-content p {
+            color: black;
+            font-size: 18px;
+            margin: 10px 0 20px;
+        }
+
+        .left-content form {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .left-content form label {
+            font-size: 15px large;
+            margin-top: 15px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        form input {
+            border: 2px solid #87c3eb;
+            width: 350px;
+            height: 25px;
+            border-radius: 6px;
+            padding: 5px;
+            font-size: 15px;
+            resize: none;
+        }
+
+        form textarea {
+            border: 2px solid #87c3eb;
+            width: 350px;
+            height: 100px;
+            border-radius: 6px;
+            padding: 5px;
+            font-size: 15px;
+            resize: none;
+        }
+
+        textarea:focus,
+        form input:focus {
+            outline: 2px solid #3891cc;
+        }
+
+        .btn {
+            font-size: 20px;
+            background: #2980b9;
+            color: white;
+            height: 45px;
+            padding: 10px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: .3s;
+            text-align: center;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .btn:hover {
+            background: #3f96cf;
+        }
+
+        .right-contact {
+            margin-left: 100px;
+        }
+
+        .right-contact img {
+            width: 420px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .contact-info div {
+            direction: ltr;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .contact-info div i {
+            font-size: 15px large;
+            color: #2980b9;
+            padding: 6px;
+            border: 1.5px solid #2980b9;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+
+        .contact-info div span {
+            font-size: 18px;
+            margin-left: 5px;
+        }
+
+        /*footer style*/
+        .footer {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 400;
+            background: white;
+            padding: 40px 0;
+        }
+
+        .footer .social {
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        .footer .social a {
+            color: #4b4c4d;
+            font-size: 25px;
+            border: 2px solid #ccc;
+            width: 40px;
+            height: 40px;
+            line-height: 38px;
+            display: inline-block;
+            text-align: center;
+            border-radius: 50%;
+            margin: 0 7px;
+            opacity: 0.75;
+        }
+
+        .footer .social a:hover {
+            opacity: 0.9;
+        }
+
+        .footer ul {
+            margin-top: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 0;
+            text-align: center;
+            direction: ltr;
+        }
+
+        .footer ul li a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        .footer ul li {
+            display: inline-block;
+            padding: 0 15px;
+        }
+
+        .footer ul li a:hover {
+            opacity: 1;
+            color: black;
+            border-bottom: 2px solid black;
+        }
+
+        .footer .copyright {
+            margin-top: 35px;
+            text-align: center;
+            font-size: 15px;
+            color: #4b4c4d;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 12px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error {
+            border-color: #e74c3c !important;
+        }
+
+        .success {
+            border-color: #2ecc71 !important;
+        }
+
+        /*responsive media query code for max width 900px */
+        @media screen and (max-width: 900px) {
+
+            .navbar :where(#menu-close-button, #menu-open-button) {
+                display: block;
+                font-size: 30px;
+
+            }
+
+            body.show-mobile-menu header::before {
+                content: "";
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                backdrop-filter: blur(5px);
+                background: rgba(0, 0, 0, 0);
+                z-index: 1;
+            }
+
+            .navbar #menu-close-button {
+                position: absolute;
+                right: 30px;
+                top: 30px;
+                color: #2980b9;
+                background: transparent;
+
+            }
+
+            .navbar #menu-open-button {
+                color: #2980b9;
+                margin: 20px;
+                width: 60px;
+                background: transparent;
+            }
+
+            .navbar .nav-menu {
+                display: block;
+                position: fixed;
+                left: -3000px;
+                top: 0;
+                width: 300px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 100px;
+                background: #f5f5f5;
+                margin: 0;
+                transition: left 0.2s ease;
+            }
+
+            body.show-mobile-menu .navbar .nav-menu {
+                left: 0;
+                z-index: 2;
+
+            }
+
+            .navbar .nav-menu .nav-link {
+                color: #2980b9;
+                display: block;
+                margin: 17px;
+                font-size: large;
+                font-size: 20px;
+            }
+
+            .hero-section .section-content {
+                gap: 50px;
+                text-align: center;
+                padding: 30px 20px 20px;
+                flex-direction: column-reverse;
+                justify-content: center;
+
+            }
+
+            .hero-section .hero-detqils :is(.subtitle, .description),
+            .about-section .about-detalis {
+                max-width: 100%;
+
+            }
+
+            .hero-section .hero-detqils .buttons {
+                justify-content: center;
+                margin-right: 0;
+            }
+
+            .hero-section .hero-image-wrapper .hero-image {
+                max-width: 350px;
+                margin: 30px 0 0px 0px;
+                align-items: center;
+            }
+
+
+
+        }
+
+
+        /* Media Queries pour téléphone */
+        @media screen and (max-width: 1000px) {
+            .container {
+                flex-direction: column;
+                height: auto;
+                padding: 50px 0;
+            }
+
+            .left-content,
+            .right-contact {
+                margin: 20px 0;
+                text-align: center;
+            }
+
+            .right-contact img {
+                width: 350px;
+            }
+        }
+
+        @media screen and (max-width: 900px) {
+
+            .left-content,
+            .right-contact {
+                margin: 15px 0;
+            }
+
+            .right-contact img {
+                width: 320px;
+            }
+
+            form input,
+            form textarea {
+                width: 300px;
+            }
+        }
+
+        @media screen and (max-width: 800px) {
+            .left-content h3 {
+                font-size: 26px;
+            }
+
+            .left-content p,
+            .contact-info div span {
+                font-size: 16px;
+            }
+
+            .right-contact img {
+                width: 280px;
+            }
+        }
+
+        @media screen and (max-width: 500px) {
+            .left-content h3 {
+                font-size: 22px;
+            }
+
+            .left-content p,
+            .contact-info div span {
+                font-size: 14px;
+            }
+
+            form input,
+            form textarea {
+                width: 250px;
+            }
+
+            .right-contact img {
+                width: 220px;
+            }
+
+            .btn {
+                font-size: 18px;
+                height: 40px;
+            }
+
+            .footer ul li {
+                display: block;
+                padding: 5px 0;
+            }
+        }
+
+        @media screen and (max-width: 1200px) {
+            .navbar .nav-menu .nav-link {
+                margin: 15px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin: 0px 30px 0px 0px;
+            }
+        }
+
+        @media screen and (max-width: 1000px) {
+            .navbar .nav-menu .nav-link {
+                margin: 6px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin-right: 50px;
+            }
+        }
+
+        @media screen and (max-width: 950px) {
+            .navbar .nav-menu .nav-link {
+                margin: 0px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin-right: 30px;
+            }
+        }
+    </style>
+</head>
+<header>
+    <nav class="navbar section-content">
+        <a href="homeFR.html"><img src="5sans_back.png" alt="png"></a>
+        <ul class="nav-menu">
+            <button id="menu-close-button" class="fas fa-times"></button>
+            <li class="nav-item"><a href="homeFR.html" class="nav-link">Accueil</a></li>
+            <li class="nav-item"><a href="AboutFR.html" class="nav-link">À propos</a></li>
+            <li class="nav-item"><a href="contacteFR.html" class="nav-link">Contactez-nous</a></li>
+            <li class="nav-item"><a href="serviceFR.html" class="nav-link">Nos services</a></li>
+            <li class="lang"><a href="HomeAR.html" class="lange">AR</a></li>
+
+
+        </ul>
+        <button id="menu-open-button" class="fas fa-bars"></button>
+    </nav>
+</header>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="left-content">
+                <h3>Contactez-nous</h3>
+                <p>Nous sommes là pour vous ! Comment pouvons-nous vous aider ?</p>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <input type="text" name="name" id="name" placeholder="Votre nom">
+                        <div id="name-error" class="error-message">Veuillez entrer votre nom</div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" id="email" placeholder="Votre email">
+                        <div id="email-error" class="error-message">Veuillez entrer un email valide</div>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" id="message" placeholder="Votre message"></textarea>
+                        <div id="message-error" class="error-message">Veuillez entrer votre message</div>
+                    </div>
+                    <button type="submit" class="btn" value="submit">Envoyer</button>
+                </form>
+                <p id="response"></p>
+            </div>
+            <div class="right-contact">
+                <img src="contact image.png" alt="png">
+                <div class="contact-info">
+                    <div>
+                        <i class="ri-map-pin-line"></i>
+                        <span>dar dbare, beni mellal, maroc</span>
+                    </div>
+                    <div>
+                        <i class="ri-phone-fill"></i>
+                        <span>+212 707-953768</span>
+                    </div>
+                    <div>
+                        <i class="ri-mail-line"></i>
+                        <span>ajireajire0@gmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="footer">
+            <div class="social">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-x-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <ul class="list">
+                <li><a href="Home.html">Accueil</a></li>
+                <li><a href="#">À propos</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Conditions</a></li>
+                <li><a href="contacte.html">Contactez-nous</a></li>
+            </ul>
+            <p class="copyright">Ajire company @2025</p>
+        </section>
+    </main>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzpwk58rZn9sm4H2sA44jc-Omy1QX-eFkpLEVStPhWkqDY_jg2Ryh4dZRYLNLvBi_sW/exec';
+        const form = document.getElementById('contact-form');
+        const response = document.getElementById('response');
+
+        // Éléments des champs et messages
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const messageInput = document.getElementById('message');
+        const nameError = document.getElementById('name-error');
+        const emailError = document.getElementById('email-error');
+        const messageError = document.getElementById('message-error');
+
+        // Validation lors de l'envoi
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+
+            // Réinitialiser les messages et couleurs
+            resetValidation();
+
+            let isValid = true;
+
+            // Vérification du nom
+            if (nameInput.value.trim() === '') {
+                nameInput.classList.add('error');
+                nameError.style.display = 'block';
+                isValid = false;
+            }
+
+            // Vérification de l'email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailInput.value.trim() === '') {
+                emailInput.classList.add('error');
+                emailError.textContent = 'Veuillez entrer un email';
+                emailError.style.display = 'block';
+                isValid = false;
+            } else if (!emailRegex.test(emailInput.value)) {
+                emailInput.classList.add('error');
+                emailError.textContent = 'Veuillez entrer un email valide';
+                emailError.style.display = 'block';
+                isValid = false;
+            }
+
+            // Vérification du message
+            if (messageInput.value.trim() === '') {
+                messageInput.classList.add('error');
+                messageError.style.display = 'block';
+                isValid = false;
+            }
+
+            // Si tous les champs sont valides, envoyer le formulaire
+            if (isValid) {
+                fetch(scriptURL, {
+                    method: 'POST',
+                    body: new FormData(form)
+                })
+                    .then(res => {
+                        form.reset();
+                        response.innerText = "✅ Votre message a été envoyé avec succès !";
+                        response.style.color = "#2ecc71";
+
+                        // Afficher le succès des champs
+                        nameInput.classList.add('success');
+                        emailInput.classList.add('success');
+                        messageInput.classList.add('success');
+
+                        // Masquer les messages de succès après 3 secondes
+                        setTimeout(() => {
+                            nameInput.classList.remove('success');
+                            emailInput.classList.remove('success');
+                            messageInput.classList.remove('success');
+                            response.innerText = "";
+                        }, 3000);
+                    })
+                    .catch(err => {
+                        response.innerText = "❌ Une erreur s'est produite lors de l'envoi.";
+                        response.style.color = "#e74c3c";
+                        console.error(err);
+                    });
+            }
+        });
+
+        // Réinitialiser la validation
+        function resetValidation() {
+            nameInput.classList.remove('error', 'success');
+            emailInput.classList.remove('error', 'success');
+            messageInput.classList.remove('error', 'success');
+
+            nameError.style.display = 'none';
+            emailError.style.display = 'none';
+            messageError.style.display = 'none';
+
+            response.innerText = "";
+        }
+
+        // Validation pendant la saisie
+        nameInput.addEventListener('input', () => {
+            if (nameInput.value.trim() !== '') {
+                nameInput.classList.remove('error');
+                nameError.style.display = 'none';
+            }
+        });
+
+        emailInput.addEventListener('input', () => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailInput.value.trim() !== '' && emailRegex.test(emailInput.value)) {
+                emailInput.classList.remove('error');
+                emailError.style.display = 'none';
+            }
+        });
+
+        messageInput.addEventListener('input', () => {
+            if (messageInput.value.trim() !== '') {
+                messageInput.classList.remove('error');
+                messageError.style.display = 'none';
+            }
+        });
+        const menuOpenButton = document.querySelector("#menu-open-button");
+        const menuCloseButton = document.querySelector("#menu-close-button");
+
+        menuOpenButton.addEventListener("click", () => {
+            //toggle mobile menu visibility
+            document.body.classList.toggle("show-mobile-menu")
+        });
+
+        // close menu when the close buttone is clicked
+        menuCloseButton.addEventListener("click", () => menuOpenButton.click());
+
+    </script>
+</body>
+
+</html>

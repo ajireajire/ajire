@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--linking font aswesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Calculateur d'Indemnité d'Ancienneté - Seniority Bonus Calculator</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .section-content {
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            padding: 60px 0 60px;
+            text-transform: uppercase;
+            font-size: large;
+            font-size: 30px;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 90px;
+            height: 6px;
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 30px;
+            background: #2980b9;
+        }
+
+        /*navigation style*/
+        .header {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            background: #f5f5f5;
+        }
+
+        header .navbar {
+            display: flex;
+            padding: 5px;
+            align-items: center;
+            justify-content: space-between;
+            background: #f5f5f5;
+            margin-bottom: 35px;
+
+        }
+
+        .navbar .nav-menu {
+            display: flex;
+            gap: 10px;
+            margin-right: 100px;
+        }
+
+
+        nav a img {
+            width: 110px;
+            padding: 0px 17px 0px;
+            margin: 8px 45px 5px 10px;
+        }
+
+        .navbar .nav-menu .nav-link {
+            color: #2980b9;
+            font-size: 20px;
+            padding: 10px 18px;
+            margin: 0px 35px;
+            border-radius: 20px;
+            transition: 0.3s ease;
+        }
+
+        .navbar .nav-menu .nav-link:hover {
+            color: white;
+            background: #2980b9;
+        }
+
+        .navbar :where(#menu-close-button, #menu-open-button) {
+            display: none;
+        }
+
+        .lange {
+            text-decoration: none;
+            font-size: 18px;
+            color: #f5f5f5;
+            padding: 8px 15px;
+            background: #2980b9;
+            border-radius: 10px;
+        }
+
+        .lange:hover {
+            text-decoration: none;
+            font-size: 18px;
+            color: #2980b9;
+            padding: 6px 13px;
+            background: transparent;
+            border: #2980b9 solid 2px;
+            border-radius: 10px;
+        }
+
+
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 0;
+            display: none;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9f7fe 100%);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .phase-box {
+            background-color: white;
+            border-radius: 6px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border-right: 4px solid #3498db;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .phase-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 18px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .calculation-step {
+            margin: 12px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .final-box {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 22px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 6px;
+        }
+
+        .error-box {
+            background-color: #fdecea;
+            color: #c0392b;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .input-error {
+            border: 1px solid #c0392b !important;
+        }
+
+        .error-message {
+            color: #c0392b;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-icon {
+            color: #c0392b;
+            margin-left: 5px;
+        }
+
+        /*responsive media query code for max width 900px */
+        @media screen and (max-width: 900px) {
+
+            .navbar :where(#menu-close-button, #menu-open-button) {
+                display: block;
+                font-size: 30px;
+
+            }
+
+            body.show-mobile-menu header::before {
+                content: "";
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                backdrop-filter: blur(5px);
+                background: rgba(0, 0, 0, 0);
+                z-index: 1;
+            }
+
+            .navbar #menu-close-button {
+                position: absolute;
+                right: 30px;
+                top: 30px;
+                color: #2980b9;
+                background: transparent;
+
+            }
+
+            .navbar #menu-open-button {
+                color: #2980b9;
+                margin: 20px;
+                width: 60px;
+                background: transparent;
+            }
+
+            .navbar .nav-menu {
+                display: block;
+                position: fixed;
+                left: -3000px;
+                top: 0;
+                width: 300px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 100px;
+                background: #f5f5f5;
+                margin: 0;
+                transition: left 0.2s ease;
+            }
+
+            body.show-mobile-menu .navbar .nav-menu {
+                left: 0;
+                z-index: 2;
+
+            }
+
+            .navbar .nav-menu .nav-link {
+                color: #2980b9;
+                display: block;
+                margin: 17px;
+                font-size: large;
+                font-size: 20px;
+            }
+
+            .hero-section .section-content {
+                gap: 50px;
+                text-align: center;
+                padding: 30px 20px 20px;
+                flex-direction: column-reverse;
+                justify-content: center;
+
+            }
+
+            .hero-section .hero-detqils :is(.subtitle, .description),
+            .about-section .about-detalis {
+                max-width: 100%;
+
+            }
+
+            .hero-section .hero-detqils .buttons {
+                justify-content: center;
+                margin-right: 0;
+            }
+
+            .hero-section .hero-image-wrapper .hero-image {
+                max-width: 350px;
+                margin: 30px 0 0px 0px;
+                align-items: center;
+            }
+
+
+
+        }
+         @media screen and (max-width: 1200px) {
+            .navbar .nav-menu .nav-link {
+                margin: 15px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin:0px 30px 0px 0px;
+            }
+        }
+
+        @media screen and (max-width: 1000px) {
+            .navbar .nav-menu .nav-link {
+                margin: 6px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin-right: 50px;
+            }
+        }
+
+        @media screen and (max-width: 950px) {
+            .navbar .nav-menu .nav-link {
+                margin: 0px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin-right: 30px;
+            }
+        }
+    </style>
+</head>
+<header>
+    <nav class="navbar section-content">
+        <a href="homeFR.html"><img src="5sans_back.png" alt="png"></a>
+        <ul class="nav-menu">
+            <button id="menu-close-button" class="fas fa-times"></button>
+            <li class="nav-item"><a href="homeFR.html" class="nav-link">Accueil</a></li>
+            <li class="nav-item"><a href="AboutFR.html" class="nav-link">À propos</a></li>
+            <li class="nav-item"><a href="contacteFR.html" class="nav-link">Contactez-nous</a></li>
+            <li class="nav-item"><a href="serviceFR.html" class="nav-link">Nos services</a></li>
+            <li class="lang"><a href="HomeAR.html" class="lange">AR</a></li>
+
+
+        </ul>
+        <button id="menu-open-button" class="fas fa-bars"></button>
+    </nav>
+</header>
+
+<body>
+    <div class="container">
+        <h1 id="appTitle">Calculateur d'Indemnité d'Ancienneté</h1>
+
+        <div class="form-group">
+            <label id="salaryLabel" for="salary">Salaire mensuel de base (DH)</label>
+            <input type="number" id="salary" min="0" value="6673" required>
+            <div id="salaryError" class="error-message">
+                <span class="error-icon">⚠</span> Veuillez saisir un salaire mensuel valide
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label id="startDateLabel" for="startDate">Date d'embauche</label>
+            <input type="date" id="startDate" required>
+            <div id="startDateError" class="error-message">
+                <span class="error-icon">⚠</span> Veuillez sélectionner une date d'embauche
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label id="endDateLabel" for="endDate">Date de fin de travail</label>
+            <input type="date" id="endDate" required>
+            <div id="endDateError" class="error-message">
+                <span class="error-icon">⚠</span> Veuillez sélectionner une date de fin
+            </div>
+        </div>
+
+        <button id="calculateBtn" onclick="calculateSeniority()">Calculer l'indemnité</button>
+
+        <div id="result">
+            <div class="result-card">
+                <div id="calculationContainer"></div>
+                <div id="finalResult" class="final-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            fr: {
+                title: "Calculateur d'Indemnité d'Ancienneté",
+                salaryLabel: "Salaire mensuel de base (DH)",
+                startDateLabel: "Date d'embauche",
+                endDateLabel: "Date de fin de travail",
+                calculateBtn: "Calculer l'indemnité",
+                annualSalary: "Salaire annuel de base",
+                totalDuration: "Durée totale de travail",
+                eligibleYears: "Années comptabilisées après les 2 premières années",
+                phase: "Phase",
+                calculation: "Calcul",
+                yearlyRate: "Taux annuel",
+                years: "années",
+                totalCompensation: "Indemnité totale à percevoir",
+                notEligible: "Non éligible à l'indemnité (minimum 2 années requises)",
+                salaryError: "Veuillez saisir un salaire mensuel valide",
+                dateError: "Veuillez sélectionner une date"
+            }
+        };
+
+        function showError(elementId, messageId, show) {
+            const inputElement = document.getElementById(elementId);
+            const errorElement = document.getElementById(messageId);
+
+            if (show) {
+                inputElement.classList.add('input-error');
+                errorElement.style.display = 'block';
+            } else {
+                inputElement.classList.remove('input-error');
+                errorElement.style.display = 'none';
+            }
+        }
+
+        function validateInputs() {
+            let isValid = true;
+            const monthlySalary = parseFloat(document.getElementById('salary').value);
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+
+            // Validate salary
+            if (isNaN(monthlySalary) || monthlySalary <= 0) {
+                showError('salary', 'salaryError', true);
+                isValid = false;
+            } else {
+                showError('salary', 'salaryError', false);
+            }
+
+            // Validate start date
+            if (!startDate) {
+                showError('startDate', 'startDateError', true);
+                isValid = false;
+            } else {
+                showError('startDate', 'startDateError', false);
+            }
+
+            // Validate end date
+            if (!endDate) {
+                showError('endDate', 'endDateError', true);
+                isValid = false;
+            } else {
+                showError('endDate', 'endDateError', false);
+            }
+
+            return isValid;
+        }
+
+        function calculateSeniority() {
+            // Hide result initially
+            document.getElementById('result').style.display = 'none';
+
+            // Validate inputs first
+            if (!validateInputs()) {
+                return;
+            }
+
+            const monthlySalary = parseFloat(document.getElementById('salary').value);
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+            const trans = translations['fr'];
+
+            const totalMonths = (endDate.getFullYear() - startDate.getFullYear()) * 12 +
+                (endDate.getMonth() - startDate.getMonth());
+            const totalYears = totalMonths / 12;
+
+            const baseSalary = monthlySalary * 12;
+
+            if (totalYears < 2) {
+                document.getElementById('calculationContainer').innerHTML = `
+                    <div class="error-box">
+                        ${trans.totalDuration}: ${totalYears.toFixed(1)} année(s)<br>
+                        ${trans.notEligible}
+                    </div>
+                `;
+                document.getElementById('finalResult').innerHTML = '';
+                document.getElementById('result').style.display = 'block';
+                return;
+            }
+
+            const phases = [
+                { start: 2, end: 5, percent: 5, years: 3 },   // De l'année 3 à 5
+                { start: 5, end: 12, percent: 10, years: 7 },  // De l'année 6 à 12
+                { start: 12, end: 20, percent: 15, years: 8 }, // De l'année 13 à 20
+                { start: 20, end: 25, percent: 20, years: 5 }, // De l'année 21 à 25
+                { start: 25, end: Infinity, percent: 25, years: Infinity } // À partir de 26 ans
+            ];
+
+            let currentSalary = baseSalary;
+            let totalCompensation = 0;
+            let stepsHTML = '';
+            let remainingYears = totalYears - 2;
+
+            stepsHTML += `
+                <div class="summary">
+                    <p><strong>${trans.annualSalary}:</strong> ${baseSalary.toFixed(2)} DH</p>
+                    <p><strong>${trans.totalDuration}:</strong> ${totalYears.toFixed(1)} année(s)</p>
+                    <p><strong>${trans.eligibleYears}:</strong> ${(totalYears - 2).toFixed(1)} année(s)</p>
+                </div>
+            `;
+
+            phases.forEach(phase => {
+                if (remainingYears > 0) {
+                    const yearsInPhase = Math.min(phase.years, remainingYears);
+                    if (yearsInPhase > 0) {
+                        const yearlyBonus = currentSalary * (phase.percent / 100);
+                        const phaseCompensation = yearlyBonus * yearsInPhase;
+
+                        stepsHTML += `
+                            <div class="phase-box">
+                                <div class="phase-title">${trans.phase} ${phases.indexOf(phase) + 1}: ${phase.percent}% (De l'année ${phase.start + 1} à ${phase.end === Infinity ? '+' : phase.end})</div>
+                                <div class="calculation-step">${currentSalary.toFixed(2)} × ${phase.percent}% = ${yearlyBonus.toFixed(2)} DH (${trans.yearlyRate})</div>
+                                <div class="calculation-step">${yearlyBonus.toFixed(2)} × ${yearsInPhase} ${trans.years} = ${phaseCompensation.toFixed(2)} DH</div>
+                            </div>
+                        `;
+
+                        totalCompensation += phaseCompensation;
+                        currentSalary += yearlyBonus;
+                        remainingYears -= yearsInPhase;
+                    }
+                }
+            });
+
+            document.getElementById('calculationContainer').innerHTML = stepsHTML;
+            document.getElementById('finalResult').innerHTML = `
+                ${trans.totalCompensation}: ${totalCompensation.toFixed(2)} DH
+            `;
+            document.getElementById('result').style.display = 'block';
+        }
+
+        // Add event listeners to clear errors when user starts typing
+        document.getElementById('salary').addEventListener('input', function () {
+            showError('salary', 'salaryError', false);
+        });
+
+        document.getElementById('startDate').addEventListener('change', function () {
+            showError('startDate', 'startDateError', false);
+        });
+
+        document.getElementById('endDate').addEventListener('change', function () {
+            showError('endDate', 'endDateError', false);
+        });
+
+        window.onload = function () {
+            const today = new Date();
+            const startDate = new Date();
+            startDate.setFullYear(today.getFullYear() - 24);
+
+            document.getElementById('startDate').valueAsDate = startDate;
+            document.getElementById('endDate').valueAsDate = today;
+        };
+        const menuOpenButton = document.querySelector("#menu-open-button");
+        const menuCloseButton = document.querySelector("#menu-close-button");
+
+        menuOpenButton.addEventListener("click", () => {
+            //toggle mobile menu visibility
+            document.body.classList.toggle("show-mobile-menu")
+        });
+
+        // close menu when the close buttone is clicked
+        menuCloseButton.addEventListener("click", () => menuOpenButton.click());
+
+        //Initialize Swiper
+        const swiper = new Swiper('.slider-wrapper', {
+            loop: true,
+            grabCursor: true,
+            spaceBetween: 25,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1
+                },
+                768: {
+                    slidesPerView: 2
+                },
+                1024: {
+                    slidesPerView: 3
+                },
+            }
+        });
+
+    </script>
+</body>
+
+</html>

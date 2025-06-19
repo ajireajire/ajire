@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--linking font aswesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>حاسبة تعويض الأعياد الدينية والوطنية</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .section-content {
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            padding: 60px 0 60px;
+            text-transform: uppercase;
+            font-size: large;
+            font-size: 30px;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 90px;
+            height: 6px;
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 30px;
+            background: #2980b9;
+        }
+
+        /*navigation style*/
+        .header {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            background: #f5f5f5;
+        }
+
+        header .navbar {
+            display: flex;
+            padding: 5px;
+            align-items: center;
+            justify-content: space-between;
+            background: #f5f5f5;
+            margin-bottom: 35px; 
+        }
+
+        .navbar .nav-menu {
+            display: flex;
+            gap: 10px;
+            margin-left: 100px;
+        }
+
+
+        nav a img {
+            width: 110px;
+            padding: 0px 17px 0px;
+            margin: 8px 45px 5px 10px;
+        }
+
+        .navbar .nav-menu .nav-link {
+            color: #2980b9;
+            font-size: 20px;
+            padding: 10px 18px;
+            margin: 0px 35px;
+            border-radius: 20px;
+            transition: 0.3s ease;
+        }
+
+        .navbar .nav-menu .nav-link:hover {
+            color: white;
+            background: #2980b9;
+        }
+
+        .navbar :where(#menu-close-button, #menu-open-button) {
+            display: none;
+        }
+
+        .lange {
+            text-decoration: none;
+            font-size: 18px;
+            color: #f5f5f5;
+            padding: 8px 15px;
+            background: #2980b9;
+            border-radius: 10px;
+        }
+
+        .lange:hover {
+            text-decoration: none;
+            font-size: 18px;
+            color: #2980b9;
+            padding: 6px 13px;
+            background: transparent;
+            border: #2980b9 solid 2px;
+            border-radius: 10px;
+        }
+
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 0;
+            display: none;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9f7fe 100%);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .phase-box {
+            background-color: white;
+            border-radius: 6px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border-right: 4px solid #3498db;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .phase-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 18px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .calculation-step {
+            margin: 12px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            direction: rtl;
+        }
+
+        .final-box {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 22px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 6px;
+        }
+
+        .error-message {
+            color: #c0392b;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .input-error {
+            border-color: #c0392b !important;
+        }
+
+        .error-balloon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: #c0392b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        .has-error .error-balloon {
+            display: flex;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .checkbox-container input {
+            width: auto;
+            margin-left: 10px;
+        }
+
+        .holidays-container {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .holidays-container.show {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .holiday-category {
+            margin-bottom: 15px;
+        }
+
+        .category-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .selected-count {
+            font-weight: bold;
+            color: #2980b9;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .toggle-holidays {
+            background-color: #f8f9fa;
+            color: #2980b9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+
+        .toggle-holidays:hover {
+            background-color: #e9f7fe;
+        }
+
+        .selected-holidays-preview {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            margin: 10px 0;
+            min-height: 20px;
+        }
+
+        .holidays-error {
+            color: #c0392b;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+            text-align: center;
+        }
+
+        .holiday-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .holiday-item:last-child {
+            border-bottom: none;
+        }
+
+        .holiday-item input {
+            margin-left: 10px;
+        }
+
+        /*responsive media query code for max width 900px */
+        @media screen and (max-width: 900px) {
+
+            .navbar :where(#menu-close-button, #menu-open-button) {
+                display: block;
+                font-size: 30px;
+
+            }
+
+            body.show-mobile-menu header::before {
+                content: "";
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                backdrop-filter: blur(5px);
+                background: rgba(0, 0, 0, 0);
+                z-index: 1;
+            }
+
+            .navbar #menu-close-button {
+                position: absolute;
+                right: 30px;
+                top: 30px;
+                color: #2980b9;
+                background: transparent;
+
+            }
+
+            .navbar #menu-open-button {
+                color: #2980b9;
+                margin: 20px;
+                width: 60px;
+                background: transparent;
+            }
+
+            .navbar .nav-menu {
+                display: block;
+                position: fixed;
+                left: -3000px;
+                top: 0;
+                width: 300px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 100px;
+                background: #f5f5f5;
+                margin: 0;
+                transition: left 0.2s ease;
+            }
+
+            body.show-mobile-menu .navbar .nav-menu {
+                left: 0;
+                z-index: 2;
+
+            }
+
+            .navbar .nav-menu .nav-link {
+                color: #2980b9;
+                display: block;
+                margin: 17px;
+                font-size: large;
+                font-size: 20px;
+            }
+
+            .hero-section .section-content {
+                gap: 50px;
+                text-align: center;
+                padding: 30px 20px 20px;
+                flex-direction: column-reverse;
+                justify-content: center;
+
+            }
+
+            .hero-section .hero-detqils :is(.subtitle, .description),
+            .about-section .about-detalis {
+                max-width: 100%;
+
+            }
+
+            .hero-section .hero-detqils .buttons {
+                justify-content: center;
+                margin-right: 0;
+            }
+
+            .hero-section .hero-image-wrapper .hero-image {
+                max-width: 350px;
+                margin: 30px 0 0px 0px;
+                align-items: center;
+            }
+
+
+
+        }
+         @media screen and (max-width: 1200px) {
+            .navbar .nav-menu .nav-link {
+                margin: 20px;
+            }
+        }
+
+        @media screen and (max-width: 1000px) {
+            .navbar .nav-menu .nav-link {
+                margin: 10px;
+            }
+        }
+
+        @media screen and (max-width: 950px) {
+            .navbar .nav-menu .nav-link {
+                margin: 5px;
+            }
+        }
+
+    </style>
+</head>
+<header>
+    <nav class="navbar section-content">
+        <a href="HomeAR.html"><img src="2sans_back-.png" alt="png"></a>
+        <ul class="nav-menu">
+            <button id="menu-close-button" class="fas fa-times"></button>
+            <li class="nav-item"><a href="HomeAR.html" class="nav-link">الصفحة الرئيسية</a></li>
+            <li class="nav-item"><a href="About.html" class="nav-link">معلومات عنا</a></li>
+            <li class="nav-item"><a href="contacte.html" class="nav-link">تواصل معنا</a></li>
+            <li class="nav-item"><a href="service.html" class="nav-link">خدماتنا</a></li>
+            <li class="lang"><a href="tardta3asofiFR.html" class="lange">FR</a></li>
+        </ul>
+        <button id="menu-open-button" class="fas fa-bars"></button>
+
+    </nav>
+</header>
+
+
+<body>
+    <div class="container">
+        <h1>حاسبة تعويض الأعياد الدينية والوطنية</h1>
+
+        <div class="form-group" id="salaryGroup">
+            <label for="salary">الأجر الشهري الأساسي (درهم)</label>
+            <input type="number" id="salary" min="0" placeholder="مثال: 5000" required>
+            <div class="error-balloon">!</div>
+            <div class="error-message"></div>
+        </div>
+
+        <div class="checkbox-container">
+            <input type="checkbox" id="received-payment">
+            <label for="received-payment">هل تلقيت أجرًا عاديًا عن هذه الأيام؟</label>
+        </div>
+
+        <div class="toggle-holidays" onclick="toggleHolidaysList()">
+            اختر الأعياد التي اشتغلت فيها
+        </div>
+
+        <div class="selected-holidays-preview" id="selectedHolidaysPreview">
+            لم يتم اختيار أي عيد
+        </div>
+
+        <div class="holidays-container" id="holidaysContainer">
+            <div class="selected-count">تم اختيار <span id="selectedHolidaysCount">0</span> يوم عيد</div>
+            <div class="holidays-error" id="holidaysError"></div>
+
+            <div class="holiday-category">
+                <div class="category-title">الأعياد الوطنية</div>
+
+                <div class="holiday-item">
+                    <input type="checkbox" class="holiday" id="holiday1" value="1">
+                    <label for="holiday1">ذكرى تقديم وثيقة الاستقلال</label>
+                </div>
+
+                <div class="holiday-item">
+                    <input type="checkbox" class="holiday" id="holiday2" value="1">
+                    <label for="holiday2">عيد العرش</label>
+                </div>
+
+                <div class="holiday-item">
+                    <input type="checkbox" class="holiday" id="holiday3" value="1">
+                    <label for="holiday3">عيد الشغل</label>
+                </div>
+
+                <div class="holiday-item">
+                    <input type="checkbox" class="holiday" id="holiday4" value="1">
+                    <label for="holiday4">عيد وادي الذهب</label>
+                </div>
+
+                <div class="holiday-item">
+                    <input type="checkbox" class="holiday" id="holiday5" value="1">
+                    <label for="holiday5">ذكرى ثورة الملك والشعب</label>
+                </div>
+
+                <div class="holiday-item">
+                    <input type="checkbox" class="holiday" id="holiday6" value="1">
+                    <label for="holiday6">عيد الشباب</label>
+                </div>
+
+                <div class="holiday-item">
+                    <input type="checkbox" class="holiday" id="holiday7" value="1">
+                    <label for="holiday7">عيد المسيرة الخضراء</label>
+                </div>
+            </div>
+
+            <div class="holiday-category">
+                <div class="category-title">الأعياد الدينية</div>
+
+                <div class="holiday-item">
+                    <input type="checkbox" class="holiday" id="holiday8" value="1">
+                    <label for="holiday8">عيد الفطر</label>
+                </div>
+
+                <div class="holiday-item">
+                    <input type="checkbox" class="holiday" id="holiday9" value="1">
+                    <label for="holiday9">عيد الأضحى</label>
+                </div>
+
+                <div class="holiday-item">
+                    <input type="checkbox" class="holiday" id="holiday10" value="1">
+                    <label for="holiday10">فاتح محرم</label>
+                </div>
+
+                <div class="holiday-item">
+                    <input type="checkbox" class="holiday" id="holiday11" value="1">
+                    <label for="holiday11">عيد المولد النبوي</label>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="calculateHolidayCompensation()">حساب التعويض</button>
+
+        <div id="result">
+            <div class="result-card">
+                <div id="calculationContainer"></div>
+                <div id="finalResult" class="final-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // تبديل عرض/إخفاء قائمة الأعياد
+        function toggleHolidaysList() {
+            const container = document.getElementById('holidaysContainer');
+            container.classList.toggle('show');
+
+            const toggleBtn = document.querySelector('.toggle-holidays');
+            if (container.classList.contains('show')) {
+                toggleBtn.innerHTML = 'إخفاء قائمة الأعياد';
+            } else {
+                toggleBtn.innerHTML = 'اختر الأعياد التي اشتغلت فيها';
+            }
+        }
+
+        // تحديث عدد الأعياد المختارة والعرض المسبق
+        function updateSelectedHolidays() {
+            const selectedHolidays = document.querySelectorAll('.holiday:checked');
+            const count = selectedHolidays.length;
+
+            document.getElementById('selectedHolidaysCount').textContent = count;
+            const preview = document.getElementById('selectedHolidaysPreview');
+
+            if (count === 0) {
+                preview.textContent = 'لم يتم اختيار أي عيد';
+                return;
+            }
+
+            let previewText = 'الأعياد المختارة: ';
+            const maxToShow = 3;
+
+            selectedHolidays.forEach((holiday, index) => {
+                if (index >= maxToShow) return;
+                const label = document.querySelector(`label[for="${holiday.id}"]`).textContent;
+                previewText += label;
+
+                if (index < Math.min(count - 1, maxToShow - 1)) {
+                    previewText += '، ';
+                }
+            });
+
+            if (count > maxToShow) {
+                previewText += ` و ${count - maxToShow} أكثر`;
+            }
+
+            preview.textContent = previewText;
+        }
+
+        // إضافة مستمعات الأحداث لجميع خانات الأعياد
+        document.querySelectorAll('.holiday').forEach(checkbox => {
+            checkbox.addEventListener('change', updateSelectedHolidays);
+        });
+
+        function calculateHolidayCompensation() {
+            // مسح الأخطاء السابقة
+            clearErrors();
+
+            // الحصول على القيم المدخلة
+            const salaryInput = document.getElementById('salary');
+            const receivedPayment = document.getElementById('received-payment').checked;
+            const selectedHolidays = document.querySelectorAll('.holiday:checked');
+
+            const monthlySalary = parseFloat(salaryInput.value);
+            const days = selectedHolidays.length;
+
+            // التحقق من صحة البيانات
+            let isValid = true;
+
+            if (!salaryInput.value || isNaN(monthlySalary)) {
+                showError('salaryGroup', 'الرجاء إدخال الأجر الشهري');
+                isValid = false;
+            } else if (monthlySalary <= 0) {
+                showError('salaryGroup', 'الراتب يجب أن يكون أكبر من الصفر');
+                isValid = false;
+            }
+
+            if (days === 0) {
+                showHolidaysError('الرجاء اختيار يوم عيد واحد على الأقل');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                document.getElementById('result').style.display = 'none';
+                return;
+            }
+
+            // حساب الأجرة اليومية (26 يوم عمل في الشهر)
+            const dailyWage = monthlySalary / 26;
+
+            // حساب التعويض
+            let compensation;
+            if (receivedPayment) {
+                compensation = dailyWage * days; // تعويض عادي
+            } else {
+                compensation = dailyWage * days * 2; // تعويض مضاعف
+            }
+
+            // بناء قائمة الأعياد المختارة
+            let selectedHolidaysList = '<ul style="text-align: right; padding-right: 20px;">';
+            selectedHolidays.forEach(holiday => {
+                const label = document.querySelector(`label[for="${holiday.id}"]`).textContent;
+                selectedHolidaysList += `<li>${label}</li>`;
+            });
+            selectedHolidaysList += '</ul>';
+
+            // بناء واجهة النتائج
+            let stepsHTML = `
+                <div class="summary">
+                    <p><strong>الأجر الشهري:</strong> ${monthlySalary.toFixed(2)} درهما</p>
+                    <p><strong>عدد أيام الأعياد:</strong> ${days} يوم</p>
+                    <p><strong>الأعياد المختارة:</strong> ${selectedHolidaysList}</p>
+                    <p><strong>حالة التعويض:</strong> ${receivedPayment ? 'تلقى أجر العيد' : 'لم يتلق أجر العيد'}</p>
+                </div>
+
+                <div class="phase-box">
+                    <div class="phase-title">تفاصيل الحساب</div>
+                    <div class="calculation-step">${monthlySalary.toFixed(2)} ÷ 26 = ${dailyWage.toFixed(2)} درهما (الأجرة اليومية)</div>
+            `;
+
+            if (receivedPayment) {
+                stepsHTML += `
+                    <div class="calculation-step">${dailyWage.toFixed(2)} × ${days} = ${compensation.toFixed(2)} درهما (تعويض عن الأيام)</div>
+                `;
+            } else {
+                stepsHTML += `
+                    <div class="calculation-step">${dailyWage.toFixed(2)} × ${days} × 2 = ${compensation.toFixed(2)} درهما (تعويض مضاعف)</div>
+                `;
+            }
+
+            stepsHTML += `</div>`;
+
+            // عرض النتائج
+            document.getElementById('calculationContainer').innerHTML = stepsHTML;
+            document.getElementById('finalResult').innerHTML = `
+                التعويض المستحق: ${compensation.toFixed(2)} درهما
+            `;
+            document.getElementById('result').style.display = 'block';
+        }
+
+        function showError(groupId, message) {
+            const group = document.getElementById(groupId);
+            const errorMessage = group.querySelector('.error-message');
+
+            group.classList.add('has-error');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+
+            const input = group.querySelector('input');
+            input.classList.add('input-error');
+        }
+
+        function showHolidaysError(message) {
+            const errorElement = document.getElementById('holidaysError');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+
+        function clearErrors() {
+            // مسح أخطاء الحقول العادية
+            const groups = document.querySelectorAll('.form-group');
+            groups.forEach(group => {
+                group.classList.remove('has-error');
+                const errorMessage = group.querySelector('.error-message');
+                if (errorMessage) errorMessage.style.display = 'none';
+
+                const input = group.querySelector('input');
+                if (input) input.classList.remove('input-error');
+            });
+
+            // مسح خطأ الأعياد
+            document.getElementById('holidaysError').style.display = 'none';
+        }
+
+        // تعيين تاريخ اليوم كقيمة افتراضية
+        window.onload = function () {
+            document.getElementById('salary').focus();
+        };
+        const menuOpenButton = document.querySelector("#menu-open-button");
+        const menuCloseButton = document.querySelector("#menu-close-button");
+
+        menuOpenButton.addEventListener("click", () => {
+            //toggle mobile menu visibility
+            document.body.classList.toggle("show-mobile-menu")
+        });
+
+        // close menu when the close buttone is clicked
+        menuCloseButton.addEventListener("click", () => menuOpenButton.click());
+
+        //Initialize Swiper
+        const swiper = new Swiper('.slider-wrapper', {
+            loop: true,
+            grabCursor: true,
+            spaceBetween: 25,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1
+                },
+                768: {
+                    slidesPerView: 2
+                },
+                1024: {
+                    slidesPerView: 3
+                },
+            }
+        });
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <!--linking font aswesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <!--linking swiper css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .section-content .hero-detqils .buttons {
+            display: flex;
+            gap: 23px;
+            margin: 35px 0px 0px 45px;
+        }
+
+        .navbar .nav-menu {
+            display: flex;
+            gap: 10px;
+            margin-right: 100px;
+        }
+
+        nav a img {
+            width: 130px;
+            padding: 0px 17px 0px;
+            margin: 8px 10px 5px 45px;
+        }
+
+        @media screen and (max-width: 1200px) {
+            .navbar .nav-menu .nav-link {
+                margin: 15px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin: 0px 30px 0px 0px;
+            }
+
+            .section-content .hero-detqils .title {
+                color: #2980b9;
+                font-size: 25px;
+                margin: 0px 30px;
+                padding: 15px;
+                text-align: justify;
+            }
+
+            .section-content .hero-detqils .description {
+                color: black;
+                font-size: large;
+                font-size: 18px;
+                margin: 0px 35px;
+                text-align: justify;
+            }
+
+            .section-content .hero-detqils .contact-us {
+                font-size: 17px;
+            }
+
+            .section-content .hero-detqils .order-new {
+                font-size: 17px;
+
+
+            }
+        }
+
+        @media screen and (max-width: 1000px) {
+            .navbar .nav-menu .nav-link {
+                margin: 6px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin-right: 50px;
+            }
+
+            .section-content .hero-detqils .title {
+                color: #2980b9;
+                font-size: 23px;
+                margin: 0px 30px;
+                padding: 15px;
+                text-align: justify;
+            }
+
+            .section-content .hero-detqils .description {
+                color: black;
+                font-size: large;
+                font-size: 16px;
+                margin: 0px 35px;
+                text-align: justify;
+            }
+
+            .section-content .hero-detqils .contact-us {
+                font-size: 16px;
+            }
+
+            .section-content .hero-detqils .order-new {
+                font-size: 16px;
+            }
+
+
+        }
+
+        @media screen and (max-width: 950px) {
+            .navbar .nav-menu .nav-link {
+                margin: 0px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin-right: 30px;
+            }
+
+            .section-content .hero-detqils .title {
+                color: #2980b9;
+                font-size: 20px;
+                margin: 0px 30px;
+                padding: 15px;
+                text-align: justify;
+            }
+
+            .section-content .hero-detqils .description {
+                color: black;
+                font-size: large;
+                font-size: 16px;
+                margin: 0px 35px;
+                text-align: justify;
+            }
+
+            .section-content .hero-detqils .contact-us {
+                font-size: 15px;
+            }
+
+            .section-content .hero-detqils .order-new {
+                font-size: 15px;
+            }
+
+            .section-content .hero-detqils .buttons {
+                margin: 30px 0px 0px 0px;
+            }
+        }
+    </style>
+</head>
+<!--Navigation-->
+<header>
+    <nav class="navbar section-content">
+        <a href="homeFR.html"><img src="5sans_back.png" alt="png"></a>
+        <ul class="nav-menu">
+            <button id="menu-close-button" class="fas fa-times"></button>
+            <li class="nav-item"><a href="homeFR.html" class="nav-link">Accueil</a></li>
+            <li class="nav-item"><a href="AboutFR.html" class="nav-link">À propos</a></li>
+            <li class="nav-item"><a href="contacteFR.html" class="nav-link">Contactez-nous</a></li>
+            <li class="nav-item"><a href="serviceFR.html" class="nav-link">Nos services</a></li>
+            <li class="lang"><a href="HomeAR.html" class="lange">AR</a></li>
+
+
+        </ul>
+        <button id="menu-open-button" class="fas fa-bars"></button>
+    </nav>
+</header>
+
+<main>
+    <section class="hero-section">
+        <div class="section-content">
+            <div class="hero-detqils">
+                <h2 class="title">Bienvenue sur Ajire, le site de calcul des indemnités
+                    selon le Code du travail marocain</h2>
+                <h3 class="subtitle"></h3>
+                <p class="description"><br>Ce site vise à permettre aux employés, employeurs et professionnels du droit
+                    de calculer facilement et transparentement les différentes indemnités légales, conformément
+                    aux dispositions du Code du travail marocain</p>
+                <div class="buttons">
+                    <a href="serviceFR.html" class="button order-new">Calculer les indemnités</a>
+                    <a href="#" class="button contact-us">Mode d'emploi</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="1home.jpg" alt="png" class="hero-image">
+            </div>
+        </div>
+    </section>
+
+    <!--About section-->
+    <section class="about-section">
+        <div class="section-content">
+            <div class="about-image-wrapper">
+                <img src="photo about.png" alt="png" class="about-image">
+            </div>
+            <div class="about-detalis">
+                <h2 class="section-title">Qui sommes-nous ?</h2>
+                <p class="text">Nous sommes une équipe passionnée par la simplification du droit social marocain, et
+                    nous cherchons à travers ce site à permettre
+                    aux employés et employeurs de comprendre leurs droits et obligations de manière pratique et facile.
+                    Ce site a été développé pour être un outil électronique gratuit qui vous aide à calculer les
+                    différentes indemnités légales prévues
+                    par le Code du travail marocain, sans avoir besoin de connaissances techniques ou juridiques.
+                    Nous nous efforçons de fournir une expérience utilisateur simple, précise et basée sur les lois en
+                    vigueur, afin que toute personne puisse :
+                    Connaître ses droits et obligations lors de la rupture du contrat de travail.
+                    Calculer les indemnités de manière automatique et transparente.
+                    Comprendre les dispositions légales relatives au licenciement, préavis, ancienneté et congés.
+                    Nous croyons que l'accès à l'information juridique est un droit pour tous, et que la technologie
+                    peut être un moyen efficace de diffuser
+                    la conscience et de réaliser la justice.</p>
+                <div class="social-link-list">
+                    <a href="" class="social-link"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="" class="social-link"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--testimonials-->
+    <section class="testimonials-section">
+        <h2 class="section-title">Questions fréquentes</h2>
+        <div class="sectin-content ">
+            <div class="slider-container swiper">
+                <div class="slider-wrapper">
+                    <ul class="testimonial-list swiper-wrapper">
+                        <li class="testimonial swiper-slide">
+                            <img src="irene-strong--FOUPtqP-mY-unsplash.jpg" alt="user" class="user-image">
+                            <h3 class="name">Quel est l'objectif de ce site ?</h3>
+                            <i class="feedback">"L'objectif est de permettre aux employés et employeurs de calculer les
+                                indemnités prévues dans
+                                le Code du travail marocain de manière simple et automatique."</i>
+                        </li>
+                        <li class="testimonial swiper-slide">
+                            <img src="irene-strong-v2aKnjMbP_k-unsplash.jpg" alt="user" class="user-image">
+                            <h3 class="name">L'utilisation du site est-elle gratuite ?</h3>
+                            <i class="feedback">"Oui, le site est accessible à tous et totalement gratuit."</i>
+                        </li>
+                        <li class="testimonial swiper-slide">
+                            <img src="irene-strong-TMt3JGoVlng-unsplash.jpg" alt="user" class="user-image">
+                            <h3 class="name">Les résultats fournis par le site sont-ils fiables ?</h3>
+                            <i class="feedback">"Oui, les indemnités sont calculées sur la base des règles du Code du
+                                travail marocain. Cependant
+                                les résultats restent approximatifs et ne remplacent pas une consultation juridique si
+                                nécessaire."</i>
+                        </li>
+                        <li class="testimonial swiper-slide">
+                            <img src="samuel-raita-RiDxDgHg7pw-unsplash.jpg" alt="user" class="user-image">
+                            <h3 class="name">Mes informations personnelles sont-elles enregistrées ?</h3>
+                            <i class="feedback">"Non, le site ne sauvegarde ni ne partage aucune information que vous
+                                entrez. Votre confidentialité
+                                est garantie."</i>
+                        </li>
+                        <li class="testimonial swiper-slide">
+                            <img src="salome-guruli-6GgCyNnF6Zs-unsplash.jpg" alt="user" class="user-image">
+                            <h3 class="name">Puis-je utiliser le site depuis mon téléphone ?</h3>
+                            <i class="feedback">"Oui, le site est compatible avec les smartphones et les ordinateurs
+                                pour faciliter l'utilisation
+                                à tout moment et en tout lieu."</i>
+                        </li>
+                        <li class="testimonial swiper-slide">
+                            <img src="irene-strong-CCfRNxAbkYI-unsplash.jpg" alt="user" class="user-image">
+                            <h3 class="name">Le site est-il basé sur la dernière version du Code du travail ?</h3>
+                            <i class="feedback">"Oui, les règles appliquées sont mises à jour à chaque modification du
+                                Code du travail
+                                marocain."</i>
+                        </li>
+                    </ul>
+                    <div class="swiper-slide-button swiper-pagination"></div>
+                    <div class="swiper-slide-button swiper-button-prev"></div>
+                    <div class="swiper-slide-button swiper-button-next"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--footer-->
+    <section class="footer">
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <ul class="list">
+            <li>
+                <a href="Home.html">Home</a>
+            </li>
+            <li>
+                <a href="About.html">About us</a>
+            </li>
+            <li>
+                <a href="#">services</a>
+            </li>
+            <li>
+                <a href="#">Tems</a>
+            </li>
+            <li>
+                <a href="contacte.html">contact us</a>
+            </li>
+        </ul>
+        <p class="copyright">
+            Ajire company @2025
+        </p>
+    </section>
+</main>
+
+<!--linking swiper script-->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!--linking custom script-->
+<script src="script.js"></script>
+
+<body>
+</body>
+
+</html>

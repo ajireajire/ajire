@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--linking font aswesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Calculateur d'Indemnité de Préavis</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="icon" href="image.png.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .section-content {
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            padding: 60px 0 60px;
+            text-transform: uppercase;
+            font-size: large;
+            font-size: 30px;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 90px;
+            height: 6px;
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 30px;
+            background: #2980b9;
+        }
+
+        /*navigation style*/
+        .header {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            background: #f5f5f5;
+        }
+
+        header .navbar {
+            display: flex;
+            padding: 5px;
+            align-items: center;
+            justify-content: space-between;
+            background: #f5f5f5;
+            margin-bottom: 35px;
+
+        }
+
+        .navbar .nav-menu {
+            display: flex;
+            gap: 10px;
+            margin-right: 100px;
+        }
+
+
+        nav a img {
+            width: 110px;
+            padding: 0px 17px 0px;
+            margin: 8px 45px 5px 10px;
+        }
+
+        .navbar .nav-menu .nav-link {
+            color: #2980b9;
+            font-size: 20px;
+            padding: 10px 18px;
+            margin: 0px 35px;
+            border-radius: 20px;
+            transition: 0.3s ease;
+        }
+
+        .navbar .nav-menu .nav-link:hover {
+            color: white;
+            background: #2980b9;
+        }
+
+        .navbar :where(#menu-close-button, #menu-open-button) {
+            display: none;
+        }
+
+        .lange {
+            text-decoration: none;
+            font-size: 18px;
+            color: #f5f5f5;
+            padding: 8px 15px;
+            background: #2980b9;
+            border-radius: 10px;
+        }
+
+        .lange:hover {
+            text-decoration: none;
+            font-size: 18px;
+            color: #2980b9;
+            padding: 6px 13px;
+            background: transparent;
+            border: #2980b9 solid 2px;
+            border-radius: 10px;
+        }
+
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 15px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+
+        #result {
+            margin-top: 30px;
+            padding: 0;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9f7fe 100%);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .phase-box {
+            background-color: white;
+            border-radius: 6px;
+            padding: 18px;
+            margin-bottom: 20px;
+            border-right: 4px solid #3498db;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .phase-title {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 18px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .calculation-step {
+            margin: 12px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+        }
+
+        .final-box {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 22px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary {
+            margin-bottom: 25px;
+            padding: 15px;
+            background-color: #ecf0f1;
+            border-radius: 6px;
+        }
+
+        .error-box {
+            background-color: #fdecea;
+            color: #c0392b;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            color: #c0392b;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .input-error {
+            border-color: #c0392b !important;
+        }
+
+        .error-balloon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            background-color: #c0392b;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            display: none;
+        }
+
+        .has-error .error-balloon {
+            display: flex;
+        }
+
+        .calculation-details {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 3px solid #3498db;
+        }
+
+        .calculation-line {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .highlight {
+            font-weight: bold;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+
+        /*footer*/
+        .footer {
+            margin-top: 15px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 400;
+            background: white;
+            padding: 40px 0;
+            border-radius: 15px;
+        }
+
+        .footer .social {
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        .footer .social a {
+            color: #4b4c4d;
+            font-size: 20px;
+            border: 2px solid #ccc;
+            width: 35px;
+            height: 35px;
+            line-height: 38px;
+            display: inline-block;
+            text-align: center;
+            border-radius: 50%;
+            margin: 0 7px;
+            opacity: 0.75;
+        }
+
+        .footer .social a:hover {
+            opacity: 0.9;
+        }
+
+        .footer ul {
+            margin-top: 0;
+            padding: 0;
+            list-style: none;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        .footer ul li a {
+            color: inherit;
+            text-decoration: none;
+            opacity: 0.8;
+        }
+
+        .footer ul li {
+            display: inline-block;
+            padding: 0 15px;
+        }
+
+        .footer ul li a:hover {
+            opacity: 1;
+            color: black;
+            border-bottom: 2px solid black;
+        }
+
+        .footer .copyright {
+            margin-top: 35px;
+            text-align: center;
+            font-size: 15px;
+            color: #4b4c4d;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /*responsive media query code for max width 900px */
+        @media screen and (max-width: 900px) {
+
+            .navbar :where(#menu-close-button, #menu-open-button) {
+                display: block;
+                font-size: 30px;
+
+            }
+
+            body.show-mobile-menu header::before {
+                content: "";
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100%;
+                width: 100%;
+                backdrop-filter: blur(5px);
+                background: rgba(0, 0, 0, 0);
+                z-index: 1;
+            }
+
+            .navbar #menu-close-button {
+                position: absolute;
+                right: 30px;
+                top: 30px;
+                color: #2980b9;
+                background: transparent;
+
+            }
+
+            .navbar #menu-open-button {
+                color: #2980b9;
+                margin: 20px;
+                width: 60px;
+                background: transparent;
+            }
+
+            .navbar .nav-menu {
+                display: block;
+                position: fixed;
+                left: -3000px;
+                top: 0;
+                width: 300px;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 100px;
+                background: #f5f5f5;
+                margin: 0;
+                transition: left 0.2s ease;
+            }
+
+            body.show-mobile-menu .navbar .nav-menu {
+                left: 0;
+                z-index: 2;
+
+            }
+
+            .navbar .nav-menu .nav-link {
+                color: #2980b9;
+                display: block;
+                margin: 17px;
+                font-size: large;
+                font-size: 20px;
+            }
+
+            .hero-section .section-content {
+                gap: 50px;
+                text-align: center;
+                padding: 30px 20px 20px;
+                flex-direction: column-reverse;
+                justify-content: center;
+
+            }
+
+            .hero-section .hero-detqils :is(.subtitle, .description),
+            .about-section .about-detalis {
+                max-width: 100%;
+
+            }
+
+            .hero-section .hero-detqils .buttons {
+                justify-content: center;
+                margin-right: 0;
+            }
+
+            .hero-section .hero-image-wrapper .hero-image {
+                max-width: 350px;
+                margin: 30px 0 0px 0px;
+                align-items: center;
+            }
+
+
+
+        }
+         @media screen and (max-width: 1200px) {
+            .navbar .nav-menu .nav-link {
+                margin: 15px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin:0px 30px 0px 0px;
+            }
+        }
+
+        @media screen and (max-width: 1000px) {
+            .navbar .nav-menu .nav-link {
+                margin: 6px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin-right: 50px;
+            }
+        }
+
+        @media screen and (max-width: 950px) {
+            .navbar .nav-menu .nav-link {
+                margin: 0px;
+            }
+
+            .navbar .nav-menu {
+                display: flex;
+                gap: 10px;
+                margin-right: 30px;
+            }
+        }
+    </style>
+</head>
+<header>
+    <nav class="navbar section-content">
+        <a href="homeFR.html"><img src="5sans_back.png" alt="png"></a>
+        <ul class="nav-menu">
+            <button id="menu-close-button" class="fas fa-times"></button>
+            <li class="nav-item"><a href="homeFR.html" class="nav-link">Accueil</a></li>
+            <li class="nav-item"><a href="AboutFR.html" class="nav-link">À propos</a></li>
+            <li class="nav-item"><a href="contacteFR.html" class="nav-link">Contactez-nous</a></li>
+            <li class="nav-item"><a href="serviceFR.html" class="nav-link">Nos services</a></li>
+            <li class="lang"><a href="HomeAR.html" class="lange">AR</a></li>
+
+
+        </ul>
+        <button id="menu-open-button" class="fas fa-bars"></button>
+    </nav>
+</header>
+
+<body>
+    <div class="container">
+        <h1>Calculateur d'Indemnité de Préavis</h1>
+
+        <div class="form-group" id="employeeTypeGroup">
+            <label for="employeeType">Type de salarié</label>
+            <select id="employeeType" required>
+                <option value="">Sélectionnez le type de salarié</option>
+                <option value="staff">Cadre ou similaire</option>
+                <option value="employee">Employé</option>
+            </select>
+            <div class="error-balloon">!</div>
+            <div class="error-message"></div>
+        </div>
+
+        <div class="form-group" id="salaryGroup">
+            <label for="salary">Salaire mensuel (DH)</label>
+            <input type="number" id="salary" min="0" required>
+            <div class="error-balloon">!</div>
+            <div class="error-message"></div>
+        </div>
+
+        <div class="form-group" id="startDateGroup">
+            <label for="startDate">Date d'embauche</label>
+            <input type="date" id="startDate" required>
+            <div class="error-balloon">!</div>
+            <div class="error-message"></div>
+        </div>
+
+        <div class="form-group" id="endDateGroup">
+            <label for="endDate">Date de fin de contrat</label>
+            <input type="date" id="endDate" required>
+            <div class="error-balloon">!</div>
+            <div class="error-message"></div>
+        </div>
+
+        <button onclick="calculateNoticeCompensation()">Calculer l'indemnité</button>
+
+        <div id="result">
+            <div class="result-card">
+                <div id="calculationContainer"></div>
+                <div id="finalResult" class="final-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--footer-->
+    <section class="footer">
+        <div class="social">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-x-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <ul class="list">
+            <li>
+                <a href="#">Accueil</a>
+            </li>
+            <li>
+                <a href="#">À propos</a>
+            </li>
+            <li>
+                <a href="#">Services</a>
+            </li>
+            <li>
+                <a href="#">Conditions</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+        <p class="copyright">
+            Société Ajire ©2025
+        </p>
+    </section>
+
+    <script>
+        function calculateNoticeCompensation() {
+            // Effacer les erreurs précédentes
+            clearErrors();
+
+            // Récupérer les valeurs saisies
+            const employeeType = document.getElementById('employeeType').value;
+            const salary = parseFloat(document.getElementById('salary').value);
+            const startDate = new Date(document.getElementById('startDate').value);
+            const endDate = new Date(document.getElementById('endDate').value);
+
+            // Valider les données
+            let isValid = true;
+
+            if (!employeeType) {
+                showError('employeeTypeGroup', 'Veuillez sélectionner le type de salarié');
+                isValid = false;
+            }
+
+            if (!document.getElementById('salary').value || isNaN(salary)) {
+                showError('salaryGroup', 'Veuillez saisir le salaire mensuel');
+                isValid = false;
+            } else if (salary <= 0) {
+                showError('salaryGroup', 'Le salaire doit être supérieur à zéro');
+                isValid = false;
+            }
+
+            if (!document.getElementById('startDate').value || isNaN(startDate.getTime())) {
+                showError('startDateGroup', 'Veuillez saisir la date d\'embauche');
+                isValid = false;
+            }
+
+            if (!document.getElementById('endDate').value || isNaN(endDate.getTime())) {
+                showError('endDateGroup', 'Veuillez saisir la date de fin');
+                isValid = false;
+            }
+
+            if (isValid && endDate <= startDate) {
+                showError('endDateGroup', 'La date de fin doit être après la date d\'embauche');
+                isValid = false;
+            }
+
+            if (!isValid) {
+                document.getElementById('result').style.display = 'none';
+                return;
+            }
+
+            // Calculer la durée de travail en jours
+            const totalDays = Math.floor((endDate - startDate) / (1000 * 60 * 60 * 24));
+            const totalMonths = Math.floor(totalDays / 30.44);
+            const totalYears = totalMonths / 12;
+
+            // Déterminer la durée de préavis selon le type de salarié et l'ancienneté
+            let noticePeriod = 0;
+            let noticeType = "jours";
+            let noticeRule = "";
+
+            if (employeeType === "staff") {
+                if (totalYears < 1) {
+                    noticePeriod = 1;
+                    noticeType = "mois";
+                    noticeRule = "Cadre avec moins d'un an d'ancienneté (droit à 1 mois)";
+                } else if (totalYears >= 1 && totalYears < 5) {
+                    noticePeriod = 2;
+                    noticeType = "mois";
+                    noticeRule = "Cadre avec 1 à 5 ans d'ancienneté (droit à 2 mois)";
+                } else {
+                    noticePeriod = 3;
+                    noticeType = "mois";
+                    noticeRule = "Cadre avec plus de 5 ans d'ancienneté (droit à 3 mois)";
+                }
+            } else {
+                if (totalYears < 1) {
+                    noticePeriod = 8;
+                    noticeRule = "Employé avec moins d'un an d'ancienneté (droit à 8 jours)";
+                } else if (totalYears >= 1 && totalYears < 5) {
+                    noticePeriod = 1;
+                    noticeType = "mois";
+                    noticeRule = "Employé avec 1 à 5 ans d'ancienneté (droit à 1 mois)";
+                } else {
+                    noticePeriod = 2;
+                    noticeType = "mois";
+                    noticeRule = "Employé avec plus de 5 ans d'ancienneté (droit à 2 mois)";
+                }
+            }
+
+            // Calculer l'indemnité
+            let compensation = 0;
+            let calculationDetails = "";
+
+            if (noticeType === "jours") {
+                const dailyRate = salary / 26;
+                compensation = dailyRate * noticePeriod;
+                calculationDetails = `
+                    <div class="phase-box">
+                        <div class="phase-title">Méthode de calcul</div>
+                        <div class="calculation-step">${noticeRule}</div>
+                    </div>
+                    <div class="calculation-details">
+                        <div class="calculation-line">
+                            1. Calcul du salaire journalier:<br>
+                            <span class="highlight">Salaire mensuel ÷ 26 jours = ${salary.toFixed(2)} ÷ 26 = ${dailyRate.toFixed(2)} DH/jour</span>
+                        </div>
+                        <div class="calculation-line">
+                            2. Calcul de l'indemnité:<br>
+                            <span class="highlight">Salaire journalier × durée de préavis = ${dailyRate.toFixed(2)} × ${noticePeriod} jours = ${compensation.toFixed(2)} DH</span>
+                        </div>
+                    </div>
+                `;
+            } else {
+                compensation = salary * noticePeriod;
+                calculationDetails = `
+                    <div class="phase-box">
+                        <div class="phase-title">Méthode de calcul</div>
+                        <div class="calculation-step">${noticeRule}</div>
+                    </div>
+                    <div class="calculation-details">
+                        <div class="calculation-line">
+                            Calcul de l'indemnité:<br>
+                            <span class="highlight">Salaire mensuel × durée de préavis = ${salary.toFixed(2)} × ${noticePeriod} mois = ${compensation.toFixed(2)} DH</span>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Afficher les résultats
+            document.getElementById('calculationContainer').innerHTML = `
+                <div class="summary">
+                    <p><strong>Type de salarié:</strong> ${employeeType === "staff" ? "Cadre" : "Employé"}</p>
+                    <p><strong>Ancienneté:</strong> ${totalMonths} mois (${totalYears.toFixed(2)} années)</p>
+                    <p><strong>Durée de préavis:</strong> ${noticePeriod} ${noticeType}</p>
+                </div>
+                ${calculationDetails}
+            `;
+
+            document.getElementById('finalResult').innerHTML = `
+                Indemnité totale de préavis: <span class="highlight">${compensation.toFixed(2)} DH</span>
+            `;
+
+            // Afficher les résultats avec animation
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showError(groupId, message) {
+            const group = document.getElementById(groupId);
+            const errorMessage = group.querySelector('.error-message');
+
+            group.classList.add('has-error');
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+
+            const input = group.querySelector('input, select');
+            input.classList.add('input-error');
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('has-error');
+                const errorMessage = group.querySelector('.error-message');
+                if (errorMessage) {
+                    errorMessage.style.display = 'none';
+                }
+                const input = group.querySelector('input, select');
+                if (input) {
+                    input.classList.remove('input-error');
+                }
+            });
+        }
+
+        // Définir les dates par défaut
+        window.onload = function () {
+            const today = new Date();
+            const startDate = new Date();
+            startDate.setFullYear(today.getFullYear() - 2);
+
+            document.getElementById('startDate').valueAsDate = startDate;
+            document.getElementById('endDate').valueAsDate = today;
+
+            // Ajouter des écouteurs d'événements pour la validation en temps réel
+            document.getElementById('employeeType').addEventListener('change', function () {
+                clearErrorForField('employeeTypeGroup');
+            });
+
+            document.getElementById('salary').addEventListener('input', function () {
+                clearErrorForField('salaryGroup');
+            });
+
+            document.getElementById('startDate').addEventListener('change', function () {
+                clearErrorForField('startDateGroup');
+            });
+
+            document.getElementById('endDate').addEventListener('change', function () {
+                clearErrorForField('endDateGroup');
+            });
+        };
+
+        function clearErrorForField(groupId) {
+            const group = document.getElementById(groupId);
+            group.classList.remove('has-error');
+            const errorMessage = group.querySelector('.error-message');
+            if (errorMessage) {
+                errorMessage.style.display = 'none';
+            }
+            const input = group.querySelector('input, select');
+            if (input) {
+                input.classList.remove('input-error');
+            }
+        }
+        const menuOpenButton = document.querySelector("#menu-open-button");
+        const menuCloseButton = document.querySelector("#menu-close-button");
+
+        menuOpenButton.addEventListener("click", () => {
+            //toggle mobile menu visibility
+            document.body.classList.toggle("show-mobile-menu")
+        });
+
+        // close menu when the close buttone is clicked
+        menuCloseButton.addEventListener("click", () => menuOpenButton.click());
+
+        //Initialize Swiper
+        const swiper = new Swiper('.slider-wrapper', {
+            loop: true,
+            grabCursor: true,
+            spaceBetween: 25,
+
+            // If we need pagination
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true,
+            },
+
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1
+                },
+                768: {
+                    slidesPerView: 2
+                },
+                1024: {
+                    slidesPerView: 3
+                },
+            }
+        });
+
+    </script>
+</body>
+
+</html>
